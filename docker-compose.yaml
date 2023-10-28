@@ -1,0 +1,16 @@
+version: '1'
+services:
+  app:
+    build: .
+    command: npm run start
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - redis
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_PORT=6379
+    ports:
+      - "${REDIS_PORT}:6379"
